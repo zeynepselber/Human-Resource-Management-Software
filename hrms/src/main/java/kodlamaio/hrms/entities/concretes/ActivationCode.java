@@ -22,7 +22,6 @@ public class ActivationCode {
 	@Column(name="is_activated" , nullable=false)
 	private boolean isActivated ;
 	
-
 	public ActivationCode() {}
 	
 	public ActivationCode(String code, boolean isActivated) {

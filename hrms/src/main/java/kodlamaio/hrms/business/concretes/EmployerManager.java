@@ -16,8 +16,6 @@ import kodlamaio.hrms.core.utilities.results.SuccessDataResult;
 import kodlamaio.hrms.core.utilities.results.SuccessResult;
 import kodlamaio.hrms.dataAccess.abstracts.EmployerDao;
 import kodlamaio.hrms.entities.concretes.Employer;
-import kodlamaio.hrms.entities.concretes.JobSeeker;
-import kodlamaio.hrms.entities.concretes.User;
 
 @Service
 public class EmployerManager implements EmployerService{
@@ -68,5 +66,10 @@ public class EmployerManager implements EmployerService{
 			result = true;
 		
 		return result ;	
+	}
+
+	@Override
+	public DataResult<Employer> getById(int id) {
+		return new SuccessDataResult<Employer>(employerDao.findById(id));
 	}
 }

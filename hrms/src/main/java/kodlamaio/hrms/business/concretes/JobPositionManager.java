@@ -52,4 +52,9 @@ public class JobPositionManager implements JobPositionService{
 		
 		return result ;
 	}
+
+	@Override
+	public DataResult<JobPosition> getById(int id) {
+		return new SuccessDataResult<JobPosition>( jobPositionDao.findById(id));
+	}
 }
