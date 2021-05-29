@@ -11,6 +11,13 @@ CREATE TABLE public.activation_codes
     PRIMARY KEY (id)
 );
 
+CREATE TABLE public.cities
+(
+    id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
+    name character varying(255) NOT NULL,
+    PRIMARY KEY (id)
+);
+
 CREATE TABLE public.employers
 (
     company_name character varying(255) NOT NULL,
@@ -25,6 +32,22 @@ CREATE TABLE public.employers_varification_by_system_personal
     id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
     user_id integer NOT NULL,
     personal_id integer NOT NULL,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE public.job_advertisements
+(
+    id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
+    employer_id integer NOT NULL,
+    job_position_id integer NOT NULL,
+    city_id integer NOT NULL,
+    description text NOT NULL,
+    min_salary double precision,
+    max_salary double precision,
+    open_position_count integer NOT NULL,
+    is_active boolean NOT NULL,
+    last_apply_date date NOT NULL,
+    create_date date NOT NULL,
     PRIMARY KEY (id)
 );
 
@@ -85,6 +108,24 @@ ALTER TABLE public.employers_varification_by_system_personal
 ALTER TABLE public.employers_varification_by_system_personal
     ADD FOREIGN KEY (user_id)
     REFERENCES public.employers (id)
+    NOT VALID;
+
+
+ALTER TABLE public.job_advertisements
+    ADD FOREIGN KEY (city_id)
+    REFERENCES public.cities (id)
+    NOT VALID;
+
+
+ALTER TABLE public.job_advertisements
+    ADD FOREIGN KEY (employer_id)
+    REFERENCES public.employers (id)
+    NOT VALID;
+
+
+ALTER TABLE public.job_advertisements
+    ADD FOREIGN KEY (job_position_id)
+    REFERENCES public.job_positions (id)
     NOT VALID;
 
 
