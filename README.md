@@ -21,6 +21,18 @@
 **Job seekers should be able to be listed. (Entire list only)**
 **Job positions should be able to be listed. (Entire list only)**
 
+**Employers should be able to add job postings to the system.**
+- Job description entry should be possible. (Compulsory)
+- The job position must be selected. (Compulsory)
+- City information should be able to be selected. (Compulsory)
+- It should be possible to enter min-max for the salary scale. (Optional)
+- The number of open positions must be entered. (Compulsory)
+- The application deadline must be entered.
+
+**All active job postings in the system should be listed.**
+**All active job postings in the system should be listed by date.**
+**All active job postings of a company should be listed in the system.**
+**Employers should be able to close a posting in the system. (Passive)**
 
 ## Built With
 -   [Java](https://www.oracle.com/java/technologies/)  - The programing language used
