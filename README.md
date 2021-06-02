@@ -34,6 +34,21 @@
 **All active job postings of a company should be listed in the system.**
 **Employers should be able to close a posting in the system. (Passive)**
 
+**Candidates should be able to enter their CV into the system.**
+- Candidates should be able to add their schools to the system. (School name, department)
+- These schools should be able to enter the years they studied in the system.
+- if candidate has not graduated, the graduation year can be blank.
+- The schools where the candidates attend should be adjusted according to the graduation year in reverse order. If not graduated this school should be displayed at the top and "in progress".
+- Candidates should be able to enter their work experience. (Business name, position)
+- If the candidate is still working, the year of leaving should be blank.
+- Candidates' experience should be reversed according to the year. If it is still running, this experience should still be displayed at the top and as "in progress".
+- Candidates should be able to enter the foreign languages they know into the system. ( Language, Level -> 1-5)
+- Candidates must be able to enter photos into the system. The photo of the candidate will be kept in the https://cloudinary.com/pricing system. (External service integration) Use the free account.
+- Candidates should be able to enter their github addresses in the system.
+- Candidates should be able to enter their linkedin addresses into the system.
+- Candidates should be able to enter the programming languages or technologies they know into the system. (Programming/Technology name)
+- Candidates should be able to add a cover letter to the system.
+
 ## Built With
 -   [Java](https://www.oracle.com/java/technologies/)  - The programing language used
 -  [SpringBoot ]

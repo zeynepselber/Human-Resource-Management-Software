@@ -18,6 +18,13 @@ CREATE TABLE public.cities
     PRIMARY KEY (id)
 );
 
+CREATE TABLE public.departments
+(
+    id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
+    name character varying(255) NOT NULL,
+    PRIMARY KEY (id)
+);
+
 CREATE TABLE public.employers
 (
     company_name character varying(255) NOT NULL,
@@ -65,6 +72,79 @@ CREATE TABLE public.job_seekers
     identification_number character varying(255) NOT NULL,
     last_name character varying(255) NOT NULL,
     id integer NOT NULL,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE public.languages
+(
+    id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
+    name character varying(255) NOT NULL,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE public.programing_languages
+(
+    id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
+    name character varying(255) NOT NULL,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE public.resume_languages
+(
+    id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
+    resume_id integer NOT NULL,
+    language_id integer NOT NULL,
+    level integer NOT NULL,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE public.resume_programming_languages
+(
+    id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
+    resume_id integer NOT NULL,
+    programming_language_id integer NOT NULL,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE public.resume_schools
+(
+    id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
+    resume_id integer NOT NULL,
+    school_id integer NOT NULL,
+    department_id integer NOT NULL,
+    start_date date NOT NULL,
+    finish_date date,
+    is_graduate boolean NOT NULL,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE public.resume_work_experiences
+(
+    id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
+    resume_id integer NOT NULL,
+    business_name character varying(255) NOT NULL,
+    "position" character varying(255) NOT NULL,
+    start_date date NOT NULL,
+    finish_date date,
+    still_working boolean NOT NULL,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE public.resumes
+(
+    id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
+    job_seeker_id integer NOT NULL,
+    image text,
+    github_address character varying(255),
+    linkedin_address character varying(255),
+    cover_letter text,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE public.schools
+(
+    id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
+    name character varying(255) NOT NULL,
     PRIMARY KEY (id)
 );
 
@@ -132,6 +212,60 @@ ALTER TABLE public.job_advertisements
 ALTER TABLE public.job_seekers
     ADD FOREIGN KEY (id)
     REFERENCES public.users (id)
+    NOT VALID;
+
+
+ALTER TABLE public.resume_languages
+    ADD FOREIGN KEY (language_id)
+    REFERENCES public.languages (id)
+    NOT VALID;
+
+
+ALTER TABLE public.resume_languages
+    ADD FOREIGN KEY (resume_id)
+    REFERENCES public.resumes (id)
+    NOT VALID;
+
+
+ALTER TABLE public.resume_programming_languages
+    ADD FOREIGN KEY (programming_language_id)
+    REFERENCES public.programing_languages (id)
+    NOT VALID;
+
+
+ALTER TABLE public.resume_programming_languages
+    ADD FOREIGN KEY (resume_id)
+    REFERENCES public.resumes (id)
+    NOT VALID;
+
+
+ALTER TABLE public.resume_schools
+    ADD FOREIGN KEY (department_id)
+    REFERENCES public.departments (id)
+    NOT VALID;
+
+
+ALTER TABLE public.resume_schools
+    ADD FOREIGN KEY (resume_id)
+    REFERENCES public.resumes (id)
+    NOT VALID;
+
+
+ALTER TABLE public.resume_schools
+    ADD FOREIGN KEY (school_id)
+    REFERENCES public.schools (id)
+    NOT VALID;
+
+
+ALTER TABLE public.resume_work_experiences
+    ADD FOREIGN KEY (resume_id)
+    REFERENCES public.resumes (id)
+    NOT VALID;
+
+
+ALTER TABLE public.resumes
+    ADD FOREIGN KEY (job_seeker_id)
+    REFERENCES public.job_seekers (id)
     NOT VALID;
 
 
