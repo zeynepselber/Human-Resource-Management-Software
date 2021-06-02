@@ -2,14 +2,18 @@ package kodlamaio.hrms.entities.concretes;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name="job_seekers")
 @PrimaryKeyJoinColumn(name="id", referencedColumnName="id")
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler","resumes"})
 public class JobSeeker extends User{
 	
 	//@JsonIgnore
@@ -25,6 +29,10 @@ public class JobSeeker extends User{
 	@Column(name="year_of_birth" , nullable = false)
 	private String yearOfBirth ;
 	
+	@OneToOne(mappedBy = "jobSeeker" , fetch = FetchType.LAZY)
+	@JoinColumn(name="id")
+	private Resume resume ;
+	
 	public JobSeeker() { super(); }
 
 	public JobSeeker(String firstName, String lastName, String identificationNumber, String yearOfBirth) {
@@ -33,6 +41,15 @@ public class JobSeeker extends User{
 		this.lastName  = lastName;
 		this.identificationNumber = identificationNumber;
 		this.yearOfBirth = yearOfBirth;
+	}
+	
+	public JobSeeker(String firstName, String lastName, String identificationNumber, String yearOfBirth , Resume resume ) {
+		super();
+		this.firstName = firstName;
+		this.lastName  = lastName;
+		this.identificationNumber = identificationNumber;
+		this.yearOfBirth = yearOfBirth;
+		this.resume = resume ;
 	}
 
 	public String getFirstName() { return firstName; }
@@ -50,5 +67,9 @@ public class JobSeeker extends User{
 	public String getYearOfBirth() { return yearOfBirth; }
 
 	public void setDateOfBirth(String yearOfBirth) { this.yearOfBirth = yearOfBirth; }
+	
+    public Resume getResume() { return resume; }
+	
+	public void setResume(Resume resume) { this.resume = resume; }
 	
 }
